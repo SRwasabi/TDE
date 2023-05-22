@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 //"evolucao_do_salario_minimo_teste3.csv"
-#define NOME_ARQ "C:/Users/CEITELABINFO/Downloads/evolucao_do_salario_minimo_teste3.csv"
+#define NOME_ARQ "evolucao_do_salario_minimo_teste3.csv"
 
-void print_dado(char[], char [], char[], float);
+void print_dado(char[], char [], char[], float, char[]);
 
 
 int main(){
     /*Var de Entrada*/
     char data[3];
     int ret;
-    printf("Escolha uma data entre 1940 a 2014 pela sua dezena e unidade: ");
+    printf("Escolha uma data entre 1940 a 2015 pela sua dezena e unidade: ");
     scanf("%s", &data);
 
 
@@ -77,7 +78,7 @@ int main(){
        // token = strtok(linha, ","); //Teste Para ler o data inteiro
 
         if(strcmp(data, vigenAno[i]) == 0){
-            print_dado(legis[i], DOU[i], moeda[i], salario[i]);
+            print_dado(legis[i], DOU[i], moeda[i], salario[i], vigenAno[i]);
             //printf("%s\n", vigenAno[i]);
         }
         i++;
@@ -88,11 +89,19 @@ int main(){
 }
 
 
-void print_dado(char legis[], char DOU[], char moeda[], float salario){
+void print_dado(char legis[], char DOU[], char moeda[], float salario, char vigenAno[]){
     printf("\n");
     printf("-------------------------------------------\n");
     printf("> Legislacao: %s\n", legis);
     printf("\tDOU: %s\n", DOU);
-    printf("\tSalario: %s %.2f\n", moeda,salario);
-
+    printf("\tSalario: %s %.2f\n", moeda, salario);
+    int Ano;
+    Ano = strtof(vigenAno, NULL);
+    if(Ano == 40){
+        printf("\tConversao: %.15f\n", salario/(pow(1000, 4)*2750));
+    }
+    else if(43 <= Ano <= 66){
+        printf("\tConversao: %.15f\n", salario/(pow(1000, 4)*2750));
+    }
+    else
 }
