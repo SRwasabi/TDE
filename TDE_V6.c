@@ -26,7 +26,7 @@ int main(){
     char vigenM[164][10];
     char vigenAno[164][3];
     char moeda[164][10];
-    float salario[164];
+    double salario[164];
 
 
     arquivo = fopen(NOME_ARQ, "r");
@@ -94,14 +94,24 @@ void print_dado(char legis[], char DOU[], char moeda[], float salario, char vige
     printf("-------------------------------------------\n");
     printf("> Legislacao: %s\n", legis);
     printf("\tDOU: %s\n", DOU);
-    printf("\tSalario: %s %.2f\n", moeda, salario);
+    printf("\tSalario: %s %.2lf\n", moeda, salario);
     int Ano;
     Ano = strtof(vigenAno, NULL);
-    if(Ano == 40){
-        printf("\tConversao: %.15f\n", salario/(pow(1000, 4)*2750));
+    char cruzado[3] = {'C', 'z', '$'};
+    if(40 <= Ano <= 66){
+        printf("\tConversao: %.15lf\n", salario/(pow(1000, 4)*2750));
     }
-    else if(43 <= Ano <= 66){
-        printf("\tConversao: %.15f\n", salario/(pow(1000, 4)*2750));
+    else if(Ano <= 85){
+        printf("\tConversao: %.15lf\n", salario/(pow(1000, 3)*2750));
     }
-    else
+    else if(Ano <= 93){
+        int i = 0;
+           if(strcmp(moeda, cruzado) == 0){
+            printf("\tConversao: %.17lf\n", salario/(pow(1000, 2)*2750));
+           }
+           else{
+             printf("\tConversao: %.17lf\n", salario/(1000*2750));
+           }
+    }
+
 }
