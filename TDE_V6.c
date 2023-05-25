@@ -6,6 +6,7 @@
 /*"evolucao_do_salario_minimo_teste3.csv"*/
 #define NOME_ARQ "evolucao_do_salario_minimo_teste3.csv"
 
+
 void print_dado(char[], char [], char[], double, char[]);
 
 
@@ -14,6 +15,27 @@ int main(){
     int opcao;
     char data[3];
     int ret;
+
+    FILE *arquivo;
+    FILE *saida;
+
+    /*Dados dos Arquivos*/
+    char legis[164][25];
+    char DOU[164][10];
+    char vigenD[164][10];
+    char vigenM[164][10];
+    char vigenAno[164][3];
+    char moeda[164][10];
+    double salario[164];
+
+    char linha[100];
+    char *token;
+
+    int escolha1;
+    int escolha2;
+
+    int j, p = 0;
+    int i;
 
     do{
             printf("\n\t================MENU================\n");
@@ -28,31 +50,18 @@ int main(){
 
             case 1:
 
-                printf("Escolha uma data entre 1940 a 2015 pela sua dezena e unidade: ");
-                scanf("%s", &data);
-
-
-                FILE *arquivo;
-
-                /*Dados dos Arquivos*/
-                char legis[164][25];
-                char DOU[164][10];
-                char vigenD[164][10];
-                char vigenM[164][10];
-                char vigenAno[164][3];
-                char moeda[164][10];
-                double salario[164];
+                printf("\tEscolha uma data entre 1940 a 2015 pela sua dezena e unidade: ");
+                scanf("%s", data);
 
 
                 arquivo = fopen(NOME_ARQ, "r");
 
                 if(arquivo == NULL){
-                    printf("Erro! Não consegui abrir o arquivo de leitura");
+                    printf("\tErro! Não consegui abrir o arquivo de leitura\n");
                     return 1;
                 }
-                char linha[100];
+
                 fgets(linha, 100, arquivo);
-                char *token;
                 int i=0;
 
                 while(fgets(linha, 100, arquivo) != NULL){
@@ -70,11 +79,10 @@ int main(){
                     strcpy(moeda[i], token);
                     token = strtok(NULL, ";");
 
-
                     /*Salario vem com '.'
                     Professor Guilherme ajudou*/
                     /*///==========================================*/
-                    int j, p = 0;
+
                     for(j = 0; token[j] != '\0'; j++){
                         token[p] = token[j];
 
@@ -94,7 +102,7 @@ int main(){
 
                     if(strcmp(data, vigenAno[i]) == 0){
                         print_dado(legis[i], DOU[i], moeda[i], salario[i], vigenAno[i]);
-                        /*printf("%s\n", vigenAno[i]);*/
+                        /*printf("%s\n", vigint i=0;enAno[i]);*/
                     }
 
                     i++;
@@ -104,7 +112,52 @@ int main(){
                 break;
 
             case 2:
-                printf("Oi");
+            printf("\tEscolha o intervalo de data\n De: ");
+                scanf("%d", &escolha1);
+                printf(" Ate: ");
+                scanf("%d", &escolha2);
+
+                saida = fopen("evolucao_do_salario_minimo_teste3V2.csv", "w+");
+
+                if(saida == NULL){
+                    printf("\tErro! Não consegui abrir o arquivo de leitura\n");
+                    return 1;
+                }
+
+                fgets(linha, 100, saida);
+                i=0;
+
+                while(fgets(linha, 100, saida) != NULL){
+                    token = strtok(linha, ";");
+                    strcpy(legis[i], token);
+                    token = strtok(NULL, ";");
+                    strcpy(DOU[i], token);
+                    token = strtok(NULL, ".");
+                    strcpy(vigenD[i], token);
+                    token = strtok(NULL, ".");
+                    strcpy(vigenM[i], token);
+                    token = strtok(NULL, ";");
+                    strcpy(vigenAno[i], token);
+                    token = strtok(NULL, ";");
+                    strcpy(moeda[i], token);
+                    token = strtok(NULL, ";");
+
+                    for(j = 0; token[j] != '\0'; j++){
+                        token[p] = token[j];
+                        if(token[j] != '.'){
+                            if(token[p] == ','){
+                                token[p] = '.';
+                            }
+                            p++;
+                        }
+                    }
+
+                    salario[i] = strtof(token, NULL);
+                }
+
+
+                fclose(saida);
+
                 break;
 
             case 3:
