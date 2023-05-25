@@ -135,35 +135,35 @@ void print_dado(char legis[], char DOU[], char moeda[], double salario, char vig
 
     if(Ano >= 93){
            if(strcmp(moeda, cruzeiroREAL) == 0){
-                printf("\tConversao: %.1lf\n", salario/2750);
+                printf("\tConversao: R$ %.1lf\n", salario/2750);
            }
            else if(strcmp(moeda, cruzeiro) == 0){
-                printf("\tConversao: %.2lf\n", salario/(1000*2750));
+                printf("\tConversao: R$ %.2lf\n", salario/(1000*2750));
            }
            else{
-                printf("\tConversao: %.3lf\n", salario);
+                printf("\tConversao: R$ %.3lf\n", salario);
            }
     }
 
     else if(Ano >= 86){
            if(strcmp(moeda, cruzado) == 0){
-                printf("\tConversao: %.4lf\n", salario/(pow(1000, 2)*2750));
+                printf("\tConversao: R$ %.4lf\n", salario/(pow(1000, 2)*2750));
            }
            else{
-                printf("\tConversao: %.5lf\n", salario/(1000*2750));
+                printf("\tConversao: R$ %.5lf\n", salario/(1000*2750));
            }
     }
 
     else if(Ano >= 67){
-        printf("\tConversao: %.6lf\n", salario/(pow(1000, 3)*2750));
+        printf("\tConversao: R$ %.6lf\n", salario/(pow(1000, 3)*2750));
     }
 
     else if(Ano >= 40){
-        printf("\tConversao: %.7lf\n", salario/(pow(1000, 4)*2750));
+        printf("\tConversao: R$ %.7lf\n", salario/(pow(1000, 4)*2750));
     }
 
     else if(Ano >= 15){
-        printf("\tConversao: %.8lf\n", salario);
+        printf("\tConversao: R$ %.8lf\n", salario);
     }
 
 
