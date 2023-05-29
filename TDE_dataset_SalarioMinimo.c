@@ -176,9 +176,12 @@ int main(){
                     salario[i] = strtof(token, NULL);
                     AnoControle[i] = strtof(vigenAno[i], NULL);
 
-                    if(AnoControle[i] <= 15) AnoControle[i] += 100; /*Adicao de 100 para poder entrar no If*/
+                    if(AnoControle[i] <= 15){
+                        AnoControle[i] += 100; /*Adicao de 100 para poder entrar no If*/
+                    }
                         dinheiroConvertido[i] = conversaoNum(salario[i], vigenAno[i], moeda[i]);
                         i++;
+
                 }
                    /*Salvando a conversao em uma string quando ela se encaixa no intervalo de ano*/
                     for(j = 0; j < 164; j++){
@@ -306,10 +309,13 @@ double conversaoNum(double salario, char vigenAno[],char moeda[]){
     else if(Ano >= 40){
          dinheiroConvertido = salario/(pow(1000, 4)*2750);
     }
-
     else if(Ano >= 95){
-         dinheiroConvertido = salario;
+        dinheiroConvertido = salario;
     }
+    else if(Ano >= 00){
+        dinheiroConvertido = salario;
+    }
+
     return dinheiroConvertido;
 }
 
